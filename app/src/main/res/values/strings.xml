@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GoSleep</string>
+
+    <!--nav-->
+    <string name="bt_nv_main">Sleep</string>
+    <string name="bt_nv_setting">Setting</string>
 </resources>
