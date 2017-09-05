@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import mimanor.com.gosleep.GoSleep;
-import mimanor.com.gosleep.fragment.Setting;
-import mimanor.com.gosleep.fragment.Sleep;
+import mimanor.com.gosleep.Fragments.Setting;
+import mimanor.com.gosleep.Fragments.Sleep;
 
 public class MainFragmentAdapter extends FragmentPagerAdapter {
 
@@ -50,5 +50,9 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
                 break;
         }
         return fragment;
+    }
+
+    public void updateView(){
+        sleep.checkStatus();
     }
 }

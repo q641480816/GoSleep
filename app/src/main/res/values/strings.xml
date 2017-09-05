@@ -1,7 +1,37 @@
 <resources>
     <string name="app_name">GoSleep</string>
 
+    <!--common-->
+    <string name="cancel">Cancel</string>
+    <string name="control_started">Sleep Control Activated</string>
+    <string name="warn">Go sleep, leave this phone alone.</string>
+
     <!--nav-->
     <string name="bt_nv_main">Sleep</string>
     <string name="bt_nv_setting">Setting</string>
+
+    <!--sleep-->
+    <string name="sleep_title">It\'s time to Sleep</string>
+    <string name="sleep_select_time">Select stop time</string>
+    <string name="sleep_start">Start</string>
+    <string name="sleep_running">Sleep Control is Activated</string>
+    <string name="sleep_no_time">Please select a stop time, then press start.</string>
+    <string name="sleep_with_time">Stop Time confirmed: </string>
+    <string name="sleep_today">Today </string>
+    <string name="sleep_tmr">Tomorrow </string>
+
+    <string name="sleep_start_confirm">Start</string>
+    <string name="sleep_start_content_top">Sleep control will start, if you leave this application, the application will restart in approximately </string>
+    <string name="sleep_start_content_end">second(s) to interrupt you.</string>
+    <string name="sleep_confirm_start">Start</string>
+
+    <!--setting-->
+    <string name="setting_system">System</string>
+    <string name="setting_c_language">Language</string>
+    <string name="setting_config">Configuration</string>
+    <string name="setting_config_dim_time">Dim duration</string>
+
+    <!--notification-->
+    <string name="notification_title">Notification</string>
+    <string name="notification_content">Sleep control service has finished.</string>
 </resources>
