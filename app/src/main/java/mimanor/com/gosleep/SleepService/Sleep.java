@@ -16,6 +16,8 @@ import java.util.Calendar;
 
 import mimanor.com.gosleep.Controller.SleepController;
 import mimanor.com.gosleep.GoSleep;
+import mimanor.com.gosleep.Manager.ActivityManager;
+import mimanor.com.gosleep.Manager.AlarmManagerSetter;
 import mimanor.com.gosleep.R;
 
 /**
@@ -41,15 +43,27 @@ public class Sleep extends Service {
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
+        System.out.println("started");
+
+        System.out.println(ActivityManager.getActivityCount());
+        if(ActivityManager.getActivityCount() == 1){
+            System.out.println(ActivityManager.getMain().is_on_top());
+        }
+
         SleepController sp = new SleepController(mContext);
         Calendar stopTime = sp.getTime();
         if(stopTime != null) {
             Calendar today = Calendar.getInstance();
             if(today.before(stopTime)) {
-                Intent it = new Intent();
-                it.setClass(mContext, GoSleep.class);
-                it.putExtra("from_service", true);
-                startActivity(it);
+
+                if(ActivityManager.getActivityCount() == 0 || !ActivityManager.getMain().is_on_top()) {
+                    AlarmManagerSetter.SetOffScreenAlarm(mContext,5);
+                    Intent it = new Intent();
+                    it.setClass(mContext, GoSleep.class);
+                    it.putExtra("from_service", true);
+                    startActivity(it);
+                }
+
             }else{
                 sp.setRunning(false);
                 notify_finish();
@@ -74,7 +88,7 @@ public class Sleep extends Service {
                 .setSmallIcon(R.mipmap.sleep)
                 .setLargeIcon(largeBitmap)
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)
-                .setAutoCancel(false)
+                .setAutoCancel(true)
                 .setContentIntent(pit);
         Notification notify1 = mBuilder.build();
         mNManager.notify(1, notify1);

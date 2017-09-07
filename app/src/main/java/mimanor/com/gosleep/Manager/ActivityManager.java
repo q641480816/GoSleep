@@ -4,6 +4,8 @@ import android.app.Activity;
 
 import java.util.HashMap;
 
+import mimanor.com.gosleep.GoSleep;
+
 /**
  * Created by GD on 3/9/2017.
  */
@@ -22,5 +24,13 @@ public class ActivityManager {
 
     public static Activity getActivity(String name){
         return activities.get(name);
+    }
+
+    public static int getActivityCount(){
+        return activities.size();
+    }
+
+    public static GoSleep getMain(){
+        return (GoSleep)activities.get("Main");
     }
 }

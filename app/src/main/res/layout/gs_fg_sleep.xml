@@ -27,12 +27,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:src="@mipmap/sleep"
-        android:layout_weight="0.75" />
+        android:layout_weight="0.8" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
+        android:layout_weight="0.15"
         tools:ignore="UselessParent"
         android:orientation="vertical">
 
@@ -43,6 +43,30 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
+            android:text="@string/sleep_start"
+            android:textSize="16.1sp" />
+
+        <TextView
+            android:id="@+id/time_final"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:text="@string/sleep_start"
+            android:textSize="16.1sp" />
+
+        <TextView
+            android:id="@+id/count_down"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:visibility="invisible"
             android:text="@string/sleep_start"
             android:textSize="16.1sp" />
 

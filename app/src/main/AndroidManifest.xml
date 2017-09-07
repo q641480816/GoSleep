@@ -24,8 +24,18 @@
             android:enabled="true"
             android:exported="true" />
 
+        <receiver
+            android:name=".BroadcastReciver.SleepCheckerReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
         <service
             android:name=".SleepService.Sleep"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".SleepService.SleepChecker"
             android:enabled="true"
             android:exported="true">
         </service>

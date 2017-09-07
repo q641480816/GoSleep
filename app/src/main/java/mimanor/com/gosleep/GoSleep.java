@@ -16,9 +16,12 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import mimanor.com.gosleep.Adapter.MainFragmentAdapter;
+import mimanor.com.gosleep.BroadcastReciver.SleepAlarmReceiver;
 import mimanor.com.gosleep.Controller.SleepController;
 import mimanor.com.gosleep.Manager.ActivityManager;
 import mimanor.com.gosleep.Manager.AlarmManagerSetter;
+import mimanor.com.gosleep.SleepService.Sleep;
+import mimanor.com.gosleep.SleepService.SleepChecker;
 
 public class GoSleep extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,ViewPager.OnPageChangeListener {
 
@@ -27,6 +30,7 @@ public class GoSleep extends AppCompatActivity implements RadioGroup.OnCheckedCh
     private Context mContext;
     private boolean self_activated;
     private boolean is_to_restart;
+    private boolean is_self_on_top;
 
     //constant
     public static final int PAGE_ONE = 0;
@@ -54,6 +58,7 @@ public class GoSleep extends AppCompatActivity implements RadioGroup.OnCheckedCh
     }
 
     private void init(){
+        is_self_on_top = true;
         ac = GoSleep.this;
         mContext = GoSleep.this;
         ActivityManager.addActivity(acName,ac);
@@ -96,6 +101,14 @@ public class GoSleep extends AppCompatActivity implements RadioGroup.OnCheckedCh
         is_to_restart = true;
     }
 
+    public void off_start_service(){
+        is_to_restart = false;
+    }
+
+    public boolean is_on_top(){
+        return is_self_on_top;
+    }
+
     @Override
     public void onBackPressed() {
         Toast.makeText(mContext, mContext.getString(R.string.warn), Toast.LENGTH_SHORT).show();
@@ -104,10 +117,13 @@ public class GoSleep extends AppCompatActivity implements RadioGroup.OnCheckedCh
     @Override
     protected void onPause() {
         super.onPause();
+        is_self_on_top = false;
         if (is_to_restart) {
             PowerManager powerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
             if (powerManager.isScreenOn()) {
                 AlarmManagerSetter.SetOffScreenAlarm(mContext);
+                //Intent it = new Intent(mContext, Sleep.class);
+                //mContext.startService(it);
             }
         }
     }
@@ -115,7 +131,10 @@ public class GoSleep extends AppCompatActivity implements RadioGroup.OnCheckedCh
     @Override
     protected void onResume() {
         super.onResume();
+        is_self_on_top = true;
         try {
+            SleepController sp = new SleepController(mContext);
+            sp.check_running();
             mfAdapter.updateView();
         }catch (NullPointerException e){
             System.out.println("Damn");

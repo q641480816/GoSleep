@@ -25,6 +25,8 @@
     <string name="sleep_start_content_end">second(s) to interrupt you.</string>
     <string name="sleep_confirm_start">Start</string>
 
+    <string name="sleep_service_end">Service will end at</string>
+
     <!--setting-->
     <string name="setting_system">System</string>
     <string name="setting_c_language">Language</string>

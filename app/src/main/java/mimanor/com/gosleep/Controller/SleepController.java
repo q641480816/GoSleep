@@ -57,4 +57,10 @@ public class SleepController {
             sm.save(running,"0");
         }
     }
+
+    public void check_running(){
+        if(!Calendar.getInstance().before(getTime())){
+            setRunning(false);
+        }
+    }
 }
