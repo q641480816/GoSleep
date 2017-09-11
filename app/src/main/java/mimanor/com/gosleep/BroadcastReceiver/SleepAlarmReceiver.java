@@ -1,4 +1,4 @@
-package mimanor.com.gosleep.BroadcastReciver;
+package mimanor.com.gosleep.BroadcastReceiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,27 +1,20 @@
 package mimanor.com.gosleep;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.PowerManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import mimanor.com.gosleep.Adapter.MainFragmentAdapter;
-import mimanor.com.gosleep.BroadcastReciver.SleepAlarmReceiver;
 import mimanor.com.gosleep.Controller.SleepController;
 import mimanor.com.gosleep.Manager.ActivityManager;
 import mimanor.com.gosleep.Manager.AlarmManagerSetter;
-import mimanor.com.gosleep.SleepService.Sleep;
-import mimanor.com.gosleep.SleepService.SleepChecker;
 
 public class GoSleep extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,ViewPager.OnPageChangeListener {
 
@@ -122,8 +115,6 @@ public class GoSleep extends AppCompatActivity implements RadioGroup.OnCheckedCh
             PowerManager powerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
             if (powerManager.isScreenOn()) {
                 AlarmManagerSetter.SetOffScreenAlarm(mContext);
-                //Intent it = new Intent(mContext, Sleep.class);
-                //mContext.startService(it);
             }
         }
     }

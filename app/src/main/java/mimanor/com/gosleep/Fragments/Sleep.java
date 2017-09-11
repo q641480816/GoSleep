@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -42,6 +43,8 @@ public class Sleep extends Fragment {
     private View view;
     private TextView time_content, time_final, count_down;
     private Button select_time, start;
+    private LinearLayout main;
+    private ScrollView terms;
 
     //values
 
@@ -56,6 +59,8 @@ public class Sleep extends Fragment {
     }
 
     private void bindView(){
+        terms = view.findViewById(R.id.terms);
+        main = view.findViewById(R.id.main);
         time_content = view.findViewById(R.id.time_content);
         time_final = view.findViewById(R.id.time_final);
         count_down = view.findViewById(R.id.count_down);
@@ -71,7 +76,9 @@ public class Sleep extends Fragment {
         today = Calendar.getInstance();
         sm = new SharedManager(mContext);
 
-        checkStatus();
+        if (checkTerms()) {
+            checkStatus();
+        }
     }
 
     private void setListener(){
@@ -108,6 +115,30 @@ public class Sleep extends Fragment {
         });
     }
 
+    public boolean checkTerms(){
+        SharedManager sm = new SharedManager(mContext);
+        if (sm.get_term()){
+            terms.setVisibility(View.GONE);
+            main.setVisibility(View.VISIBLE);
+            return true;
+        }else{
+            terms.setVisibility(View.VISIBLE);
+            main.setVisibility(View.GONE);
+            Button accept = view.findViewById(R.id.accept);
+            accept.setOnClickListener(new LinearLayout.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    terms.setVisibility(View.GONE);
+                    main.setVisibility(View.VISIBLE);
+                    checkStatus();
+                    SharedManager sm = new SharedManager(mContext);
+                    sm.set_term();
+                }
+            });
+            return false;
+        }
+    }
+
     public void checkStatus(){
         if(sController.isRunning()){
             time_content.setText(mContext.getString(R.string.sleep_running));
@@ -117,7 +148,6 @@ public class Sleep extends Fragment {
             time_final.setText(mContext.getString(R.string.sleep_service_end) + " " + sdf.format(sController.getTime().getTime()));
             gosleep.set_start_service();
             set_count_down();
-
             //activated_action();
         }else{
             time_content.setText(mContext.getString(R.string.sleep_no_time));

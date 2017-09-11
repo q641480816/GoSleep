@@ -23,4 +23,16 @@ public class SharedManager {
         SharedPreferences sp = mContext.getSharedPreferences(name, Context.MODE_PRIVATE);
         return sp.getString(v_name, "");
     }
+
+    public boolean get_term(){
+        SharedPreferences sp = mContext.getSharedPreferences(name, Context.MODE_PRIVATE);
+        return sp.getBoolean("term",false);
+    }
+
+    public void set_term(){
+        SharedPreferences sp = mContext.getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("term", true);
+        editor.apply();
+    }
 }

@@ -10,6 +10,10 @@
     <string name="bt_nv_main">Sleep</string>
     <string name="bt_nv_setting">Setting</string>
 
+    <!--setting-->
+    <string name="term_title">Terms of Use</string>
+    <string name="term_accept">Accept to use</string>
+
     <!--sleep-->
     <string name="sleep_title">It\'s time to Sleep</string>
     <string name="sleep_select_time">Select stop time</string>
@@ -31,9 +35,23 @@
     <string name="setting_system">System</string>
     <string name="setting_c_language">Language</string>
     <string name="setting_config">Configuration</string>
-    <string name="setting_config_dim_time">Dim duration</string>
+    <string name="setting_config_dim_value">Dim</string>
+    <string name="setting_no_item">No item found</string>
 
     <!--notification-->
     <string name="notification_title">Notification</string>
     <string name="notification_content">Sleep control service has finished.</string>
+
+
+    <!--terms-->
+    <string name="term_1">1. This app dose not require internet access, also it will not require any sensitive permission, it will not access to any of your sensitive data.</string>
+    <string name="term_2">2. Once the service is started, it will interrupt basically all your activities on your phone. If you leave this app during this service, the app will restart itself in approximately 5 seconds.</string>
+    <string name="term_3">3. Try not to exit the app by killing the app or exiting to home during the service.</string>
+    <string name="term_4">4. This app will not hijack your phone, it will not lock your phone ot rewrite any System Settings you have. You are still able to use your phone during the service.</string>
+    <string name="term_5">5. Preventing using phone before sleep is a self-control stuff, this app can only help to mention you that this is not a good time to use phone, you can force the service by uninstalling this app ny time.</string>
+    <string name="term_6">6. In terms of functionality, if you exit the app by pressing recent apps, it will restart in 2–6 seconds, if you exit it by pressing home, it will restart in around 10 seconds.(Duration varies from phone models)</string>
+    <string name="term_7">7. In terms of app capability. Unfortunately, this app dose not support all mobile model, it works fine for most of models with native android framework, but if your using phone with DIY android frameworks, it may not work. Known unsupported models are mainly from Xiaome and Huawei.</string>
+    <string name="term_8">8. Try not to restart your phone to force the service to stop, its useless and even will affect your phone performance during the service.</string>
+    <string name="term_9">9. You need to read carefully and accept to those terms to use this app. Thanks.</string>
+
 </resources>

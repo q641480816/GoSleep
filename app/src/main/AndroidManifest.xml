@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mimanor.com.gosleep">
 
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -14,20 +14,29 @@
         <activity android:name=".GoSleep">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <receiver
-            android:name=".BroadcastReciver.SleepAlarmReceiver"
+            android:name=".BroadcastReceiver.SleepAlarmReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <receiver
-            android:name=".BroadcastReciver.SleepCheckerReceiver"
+            android:name=".BroadcastReceiver.SleepCheckerReceiver"
             android:enabled="true"
             android:exported="true" />
+
+        <receiver
+            android:name=".BroadcastReceiver.AlarmOnPowerUp"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
 
         <service
             android:name=".SleepService.Sleep"

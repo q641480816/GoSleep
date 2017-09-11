@@ -1,16 +1,13 @@
-package mimanor.com.gosleep.SleepService;
+package mimanor.com.gosleep.BroadcastReceiver;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.IBinder;
-import android.os.PowerManager;
-import android.support.annotation.Nullable;
 
 import java.util.Calendar;
 
@@ -20,29 +17,15 @@ import mimanor.com.gosleep.Manager.ActivityManager;
 import mimanor.com.gosleep.Manager.AlarmManagerSetter;
 import mimanor.com.gosleep.R;
 
-/**
- * Created by GD on 4/9/2017.
- */
+import static android.content.Context.NOTIFICATION_SERVICE;
 
-public class Sleep extends Service {
+public class AlarmOnPowerUp extends BroadcastReceiver {
 
     private Context mContext;
-    private PowerManager pm;
 
-    @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    public void onCreate() {
-        mContext = this;
-        pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
-
-        super.onCreate();
-    }
-
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public void onReceive(Context context, Intent intent) {
+        mContext = context;
         SleepController sp = new SleepController(mContext);
         if(sp.isRunning()) {
             Calendar stopTime = sp.getTime();
@@ -55,7 +38,7 @@ public class Sleep extends Service {
                         Intent it = new Intent();
                         it.setClass(mContext, GoSleep.class);
                         it.putExtra("from_service", true);
-                        startActivity(it);
+                        mContext.startActivity(it);
                     }
 
                 } else {
@@ -67,16 +50,14 @@ public class Sleep extends Service {
                 System.out.println("Screen off!");
             }
         }
-        stopSelf();
-        return super.onStartCommand(intent, flags, startId);
     }
 
     private void notify_finish(){
         Intent it = new Intent(mContext, GoSleep.class);
         PendingIntent pit = PendingIntent.getActivity(mContext, 0, it, 0);
-        NotificationManager mNManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Bitmap largeBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.notification);
-        Notification.Builder mBuilder = new Notification.Builder(this);
+        NotificationManager mNManager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
+        Bitmap largeBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.notification);
+        Notification.Builder mBuilder = new Notification.Builder(mContext);
         mBuilder.setContentTitle(mContext.getString(R.string.notification_title))
                 .setContentText(mContext.getString(R.string.notification_content))
                 .setWhen(System.currentTimeMillis())
